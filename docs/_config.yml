@@ -1,5 +1,5 @@
-title: "AB-3"
-theme: minima
+title: "Study Bananas"
+theme: jekyll
 
 header_pages:
   - UserGuide.md
