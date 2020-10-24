@@ -10,15 +10,15 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.ui.sidebar.SideBar;
 import seedu.address.ui.util.Observable;
-import seedu.address.ui.util.Observer;
 import seedu.address.ui.util.SingletonUiState;
+import seedu.address.ui.util.UiStateListener;
 import seedu.address.ui.util.UiStateType;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements Observer {
+public class MainWindow extends UiPart<Stage> implements UiStateListener {
 
     private static final String FXML = "MainWindow.fxml";
 

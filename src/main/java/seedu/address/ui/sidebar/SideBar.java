@@ -13,11 +13,11 @@ import javafx.stage.Stage;
 import seedu.address.logic.Logic;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.util.Observable;
-import seedu.address.ui.util.Observer;
 import seedu.address.ui.util.SingletonUiState;
+import seedu.address.ui.util.UiStateListener;
 import seedu.address.ui.util.UiStateType;
 
-public class SideBar extends UiPart<Region> implements Observer {
+public class SideBar extends UiPart<Region> implements UiStateListener {
     private static final String FXML = "SideBar.fxml";
 
     private final Image scheduleImage = new Image(this.getClass()

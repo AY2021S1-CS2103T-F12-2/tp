@@ -1,7 +1,7 @@
 package seedu.address.ui.util;
 
-public interface Observer {
+public interface Observer<T> {
     void subscribe(Observable news);
 
-    void update(UiStateType state);
+    void update(T state);
 }

@@ -8,11 +8,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.util.Observable;
-import seedu.address.ui.util.Observer;
 import seedu.address.ui.util.SingletonUiState;
+import seedu.address.ui.util.UiStateListener;
 import seedu.address.ui.util.UiStateType;
 
-public class SideBarTab extends UiPart<Region> implements Observer {
+public class SideBarTab extends UiPart<Region> implements UiStateListener {
     private static final String FXML = "SideBarTab.fxml";
     private static final String BUTTON_FOCUSED_BACKGROUND_COLOR = "-fx-background-color: #E2B603";
 
