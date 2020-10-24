@@ -9,16 +9,13 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.ui.sidebar.SideBar;
-import seedu.address.ui.util.Observable;
-import seedu.address.ui.util.SingletonUiState;
-import seedu.address.ui.util.UiStateListener;
-import seedu.address.ui.util.UiStateType;
+import seedu.address.ui.util.MainWindowUiStateListener;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements UiStateListener {
+public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -27,7 +24,9 @@ public class MainWindow extends UiPart<Stage> implements UiStateListener {
     private final Stage primaryStage;
     private final Logic logic;
 
-    private SingletonUiState uiState;
+    private MainWindowUiStateListener uiStateListener;
+    private ScheduleUi scheduleUi;
+    private FlashcardUi flashcardUi;
 
     @FXML
     private BorderPane mainWindow;
@@ -43,14 +42,15 @@ public class MainWindow extends UiPart<Stage> implements UiStateListener {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        scheduleUi = new ScheduleUi(logic);
+        flashcardUi = new FlashcardUi(logic);
 
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        //subscribe to UiState
-        uiState = SingletonUiState.getInstance();
-        subscribe(uiState);
+        // Set up listeners
+        uiStateListener = new MainWindowUiStateListener(mainWindow, scheduleUi, flashcardUi);
 
     }
 
@@ -64,9 +64,6 @@ public class MainWindow extends UiPart<Stage> implements UiStateListener {
      */
     void fillInnerParts() {
         mainWindow.setLeft(new SideBar(primaryStage, logic).getRoot());
-
-        //default center view
-        handleStateChange(this.uiState.getUiState());
     }
 
     /**
@@ -85,28 +82,5 @@ public class MainWindow extends UiPart<Stage> implements UiStateListener {
         primaryStage.show();
     }
 
-
-    private void handleStateChange(UiStateType state) {
-        switch (state) {
-        case SCHEDULE:
-            mainWindow.setCenter(new ScheduleUi(logic).getRoot());
-            break;
-        case FLASHCARD:
-            mainWindow.setCenter(new FlashcardUi(logic).getRoot());
-            break;
-        default:
-            throw new IllegalArgumentException();
-        }
-    }
-
-    @Override
-    public void subscribe(Observable news) {
-        news.register(this);
-    }
-
-    @Override
-    public void update(UiStateType state) {
-        handleStateChange(state);
-    }
 
 }
