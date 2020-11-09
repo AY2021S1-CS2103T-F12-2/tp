@@ -2,16 +2,21 @@
 
 !include style.puml
 
-interface Model MODEL_COLOR
-interface ScheduleModel MODEL_COLOR
-interface FlashcardModel MODEL_COLOR
-interface QuizModel MODEL_COLOR
+skinparam arrowThickness 1.1
+skinparam arrowColor #black
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classBorderColor MODEL_COLOR_T1
 
+Interface Model <<Interface>> MODEL_COLOR
+Interface ScheduleModel <<Interface>> MODEL_COLOR
+Interface FlashcardModel <<Interface>> MODEL_COLOR
+Interface QuizModel <<Interface>> MODEL_COLOR
 
-
-Model -[MODEL_COLOR_T1]-|> ScheduleModel
-Model -[MODEL_COLOR_T1]-|> FlashcardModel
-Model -[MODEL_COLOR_T1]-|> QuizModel
+Model --|> ScheduleModel
+Model --|> FlashcardModel
+Model --|> QuizModel
 
 
 @enduml
+
+

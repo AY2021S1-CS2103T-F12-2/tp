@@ -45,7 +45,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+<p align="center">
+  <img src="images/ArchitectureDiagram.png" width="450" />
+</p>
 
 StudyBananas is a brown field project adapted and developed upon **AddressBook3**. Our team decides to reuse the overall architecture by maintaining the system with 6 components (listed in the picture above) but scale each component to cater the need of StudyBananas.
 The ***Architecture Diagram*** given above explains the high-level design of the **StudyBananas**, which is inherited from **AddressBook3**. Given below is an overview of each component, we will explain how each component works internally, and how do we scale the system, which can server as a guideline for the developers to expand StudyBananas.
@@ -76,7 +78,9 @@ Each of the four components,
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
-![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+<p align="center">
+  <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" height="600" />
+</p>
 
 **How the architecture components interact with each other**
 
@@ -110,19 +114,25 @@ The following is the step by step guide of how we structure Model component. We 
 
 Step 1. Create XYZModel interfaces for each system. They work similar as APIs for individual systems, but other components in **StudyBananas** would not access them directly. Instead, we have our API `Model` interface extends from all of them to make sure there is still the only one API class for `Model` component.
 
-![ModelStructure-Step1](images/ModelStructure-Step1.png)
+<p align="center">
+  <img src="images/ModelStructure-Step1.png" alt="ModelStructure-Step1" />
+</p>
 
 Step 2. Create XYZModelManagers which implement the XYZModel and contain CRUD methods on the persistence data in StudyBananas.
 
-![ModelStructure-Step2](images/ModelStructure-Step2.png)
+![ModelStructure-Step2](images/ModelArchitectureDiagram2.png)
 
 Step 3. Create system-level Models (Schedule, Flashcard, Quiz) which are models that perform CRUD on the data. Then, create a dependency between `XYZModelManagers` and `system-level Models` so that the CRUD methods in `XYZModelManager` can take advantage of them.
 
-![ModelStructure-Step3](images/ModelStructure-Step3.png)
+<p align="center">
+  <img src="images/ModelStructure-Step3.png" alt="ModelStructure-Step3" height="400" />
+</p>
 
 Step 4. Finally, create our **"one and only one"** Model component API class - `ModelManager` which implements the `Model` interface and contains all the ModelManagers. In this way, although the `ModelManager` contains all the CRUD methods from 4 individual `Models`. It can be viewed as a dummy class which does not contain any implementation. All implementations are in the individual `ModelManagers`. Therefore, we are able to test the real implementation of one `Model` without the interference from other `Models`.
 
-![ModelStructure-Step4](images/ModelArchitectureDiagram.png)
+<p align="center">
+  <img src="images/ModelArchitectureDiagram.png" alt="ModelArchitectureDiagram" height="400" />
+</p>
 
 
 #### Analysis
@@ -206,7 +216,9 @@ Step1. Create a class named `GlobalState` and make it singleton, and set the `st
     
 </div>
 
-![UiGlobalStateProblem](images/UiGlobalStateSolution.png)
+<p align="center">
+  <img src="images/UiGlobalStateSolution.png" alt="UiGlobalStateSolution" height="550" />
+</p>
 
 Step2. Have the components that require the `static state` depend on the `GlobalState` to fetch and update the `static state` easily.
 
@@ -214,8 +226,9 @@ Step2. Have the components that require the `static state` depend on the `Global
     
 </div>
     
-![UiGlobalStateProblem](images/UiGlobalStateSolution2.png)
-
+<p align="center">
+  <img src="images/UiGlobalStateSolution2.png" alt="UiGlobalStateSolution2" />
+</p>
 
 #### Analysis
 
@@ -277,7 +290,9 @@ The following paragraphs provide the class diagrams of the three `Ui` pages. Dev
 
 #### `FlashcardUi`
 
-![FlashcardUi](images/FlashcardUiClassDiagram.png)
+<p align="center" >
+  <img src="images/FlashcardUiClassDiagram.png" alt="FlashcardUiClassDiagram"  />
+</p>
 
 #### `QuizUi`
 
@@ -287,13 +302,17 @@ The following paragraphs provide the class diagrams of the three `Ui` pages. Dev
 
 ### **3.3. Logic component**
 
-![Structure of the Logic Component](images/LogicClassDiagram.png)
+<p align="center" >
+  <img src="images/LogicClassDiagram.png" alt="Structure of the Logic Component" height="600" />
+</p>
 
 <div align="center">Figure __. Structure of the logic component</div>
 
 <p></p>
 
-![Details of the StudyBananasParser](images/StudyBananasParser.png)
+<p align="center" >
+  <img src="images/StudyBananasParse.png" alt="Details of the StudyBananasParser" />
+</p>
 
 <div align="center">Figure __. Structure of the StudyBananasParser</div>
 
@@ -380,7 +399,7 @@ to find out all the time formats that StudyBananas supports). As the number of s
 a scalable structure is then proposed. The picture below describes the overall structure.
 
 <p align="center" >
-  <img src="images/DateTimeFormatStructure.png" alt="DateTimeFormatStructure" />
+  <img src="images/DateTimeFormatStructure.png" alt="DateTimeFormatStructure" height="450" />
 </p>
 
 Each `Format` implements `check` method from `DateFormat` interface. The `check` method checks if the input string
@@ -394,13 +413,13 @@ Step1. Create a `Format` class for the desired date format, and have it implemen
 Then, specify the check logic in the `check` method.
 
 <p align="center" >
-  <img src="images/NewDateTimeFormat-Step1.png" alt="NewDateTimeFormat-Step1" />
+  <img src="images/NewDateFormat-Step1.png" alt="NewDateTimeFormat-Step1" />
 </p>
 
 Step2. Add the new `DateFormat` into the check list residing in the `TimeFormatChecker` class.
 
 <p align="center" >
-  <img src="images/NewDateTimeFormat-Step2.png" alt="NewDateTimeFormat-Step2" />
+  <img src="images/NewDateFormat-Step2.png" alt="NewDateTimeFormat-Step2" />
 </p>
 
 #### Design consideration:
@@ -954,27 +973,250 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample tasks, flashcards and quiz records. The window size is fixed.
 
-### Deleting a task
+### Commands for manual testing
+
+Note: For all commands except for general ones, only quiz mode commands are allowed when a quiz has started.
+
+#### `SCHEDULE` commands
+
+| Action                  | Format, Examples                                                                                                                 |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Add `TASK`**          | `add task <T:title> [d:description] [t:time] [dur:duration]` <br> e.g. `add task T:CS2103T d:iP submission t: 2020-09-17 23:59` |
+| **List `TASK`s**        | `list task` <br>                                                                                                                 |
+| **Delete `TASK`**       | `delete task <index>` <br> e.g., `delete task 6`                                                                                 |
+| **Search for `TASK`s**  | `search task <keywords>` <br> e.g., `search task CS2103T deadlines`                                                              |
+| **Edit `TASK`**         | `edit task <index> [T:title] [d:description] [t:time] [dur:duration]` <br> e.g. `edit task 1 d: Debug remaining errors dur: 60`  |
+
+##### **Add `TASK`**
+
+1. Adding a task while all tasks are being shown
+
+   1. Prerequisites: List all tasks using the `list task` command. The task CS2103T with the same description and time should not exist yet.
+
+   1. Test case: Enter `add task T:CS2103T d:iP submission t: 2020-09-17 23:59`<br>
+      Expected: A new task is created in the task list at the bottom, with title "CS2103T", description "iP submission" and time "17 Sep 2020, 11:59PM".
+      The task list indexes should remain the same.
+      However, after the entry of this command again, an error message appears, stating that this task already exists in StudyBananas.
+      
+   1. Test case: Enter `add task T:` <br>
+      Expected: No task is added. Error details shown in the pop-up saying task title must not be blank. Task list remains the same.
+      
+   1. Other incorrect delete commands to try: `add task` <br>
+      Expected: Invalid command format error.
+
+
+##### **List `TASK`s**
+
+1. Listing tasks in StudyBananas
+
+   1. Test case: Enter `list tasks`<br>
+      Expected: The task list displays all tasks currently in StudyBananas. Deleted tasks will not be displayed.
+
+##### **Delete `TASK`**
 
 1. Deleting a task while all tasks are being shown
 
-   1. Prerequisites: List all tasks using the `list task` command. Multiple tasks in the list.
+   1. Prerequisites: List all task using the `list task` command. Multiple tasks in the list.
 
    1. Test case: `delete task 1`<br>
-      Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
+      Expected: First task is deleted from the list. Details of the deleted contact shown in the green pop-up.
 
    1. Test case: `delete task 0`<br>
-      Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the red pop-up. No change in the task list.
 
-   1. Other incorrect delete commands to try: `delete task`, `delete task x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete task`, `delete  task x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+##### **Search for `TASK`s**
+
+1. Finding tasks by keywords
+
+    1. Prerequisites: List all tasks using the `task list` command. Existing tasks include CS2103T and Job.
+
+    1. Test case: Enter `search task CS2103T deadlines`<br>
+       Expected: Finds all tasks with the same keywords.
+       A list of tasks will be displayed by StudyBananas.
+
+    1. Test case: Enter `search task`<br>
+       Expected: An error message appears, stating that the command format is invalid.
+
+##### **Edit `TASK`**
+
+1. Editing a task while all tasks are being shown
+
+   1. Prerequisites: List all tasks using the `list task` command.
+
+   1. Test case: Enter `edit task 1 d: Debug remaining errors dur: 60`<br>
+      Expected: The first task in the currently displayed list of tasks is edited to have the description "Debug remaining errors" and duration of 60 minutes. 
+      The task list should remain listed in the original order.
+      
+   1. Test case: Enter `edit task 1` <br>
+      Expected: No task is edited. Error details shown in the red pop-up. Task list remains the same.
+      
+   1. Other incorrect edit commands to try: `edit task` and `edit task random` <br>
+      Expected: Similar to previous.
+      
+1. Editing a task while no tasks are shown
+
+    1. Prerequisites: Use the `search task` command to find tasks that does not match any keywords in StudyBananas.
+       A blank task list should be displayed.
+
+    1. Test case: `edit task 1 T:change title` <br>
+        Expected: No task is edited. Error details shown in the pop-up as invalid index. Task list remains the same.
+
+<p>&nbsp;</p>
+
+#### `FLASHCARD` commands
+
+| Action                                  | Format, Examples                                                                                        |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Add `FLASHCARDSET`**                  | `add flset <name:setname>` <br> e.g., `add flset name:Japanese`                                         |
+| **Delete `FLASHCARDSET`**               | `delete flset <setindex>` <br> e.g., `delete flset 1`                                                   |
+| **List `FLASHCARD` in a specified set** | `list fl <setindex>` <br> e.g., `list fl 1`                                                             |
+| **Add `FLASHCARD` in a specified set**  | `add fl <flset:setindex> <q:question> <a:answer>` <br> e.g., `add fl flset:2 q:Is earth flat? a:Maybe!` |
+| **Delete `FLASHCARD` in specified set** | `delete fl <flset:setindex> <fl:index>` <br> e.g., `delete fl flset:1 fl:1`                             |
+
+##### **Add `FLASHCARDSET`**
+
+1. Adding a flashcard set while all flashcard sets are being shown
+
+   1. Test case: Enter `add flset name:Japanese`<br>
+      Expected: A new flashcard set is created in the flashcard set list at the bottom, with the name "Japanese".
+      The flashcard set indexes should remain the same.
+      However, after the entry of this command again, an error message appears, stating that this flashcard set already exists in StudyBananas.
+      
+   1. Test case: Enter `add flset name:` <br>
+      Expected: No flashcard set is added. Error details shown in the result display saying flashcard set name must not be blank. Flashcard set list remains the same.
+      
+   1. Other incorrect delete commands to try: `add flset` <br>
+      Expected: Invalid command format error, error details are shown.
+
+##### **Delete `FLASHCARDSET`**
+
+1. Deleting a flashcard set while all flashcard sets are being shown
+
+   1. Test case: `delete flset 1`<br>
+      Expected: First flashcard set is deleted from the list. Details of the deleted flashcard set shown in the result box.
+
+   1. Test case: `delete flset 0`<br>
+      Expected: No flashcard set is deleted. Error details shown in the result display. No change in the flashcard set list.
+
+   1. Other incorrect delete commands to try: `delete flset`, `delete  flset x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+##### **List `FLASHCARD` in a specified set**
+1. Listing tasks in StudyBananas
+
+   1. Test case: Enter `list fl flset:1`<br>
+      Expected: The flashcard table displays all flashcards currently in the specified flashcard set StudyBananas. Deleted flashcards will not be displayed.
+      
+   1. Test case: Enter `list fl flset:0`<br>
+      Expected: Error message displayed on the result box stating index is invalid.
+      
+   1. Test case: Enter `list fl flset:` or `list fl flset:x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+##### **Add `FLASHCARD` in a specified set**
+
+1. Adding a flashcard in a flashcard set
+
+   1. Test case: Enter `add fl flset:1 q:Is Earth flat? a:Maybe` <br>
+      Expected: A new flashcard is created in the flashcard table at the bottom, with the specified question and answer.
+      The flashcard set and flashcard indexes within the set should remain the same.
+      However, after the entry of this command again, an error message appears, stating that this flashcard already exists in StudyBananas.
+      
+   1. Test case: Enter `add fl flset:1` <br>
+      Expected: No flashcard set is added. Error details shown in the result display saying flashcard question and answer must not be blank. Flashcard set and flashcard list remains the same.
+      
+   1. Other incorrect delete commands to try: `add fl` <br>
+      Expected: Invalid command format error, error details are shown.
+
+##### **Delete `FLASHCARD` in specified set**
+
+1. Deleting a flashcard from a flashcard set
+
+   1. Test case: `delete fl flset:1 fl:1`<br>
+      Expected: First flashcard is deleted from the flashcard table of the first flashcard set. Details of the deleted flashcard shown in the result box.
+
+   1. Test case: `delete fl fl:0 flset:1`<br>
+      Expected: No flashcard is deleted. Error details shown in the result display. No change in the flashcard set or flashcard list.
+
+   1. Other incorrect delete commands to try: `delete fl flset:`, `delete fl flset:x fl:x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+<p>&nbsp;</p>
+
+#### `QUIZ` commands
+
+| Action                 | Format, Examples                                                                                                                                                                              |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`QUIZ` flset**       | `quiz <flset:setindex>` e.g., `quiz flset:7`. <br> `quiz <flset:setname>` eg., `quiz flset:Japanese`. <br> Available only in quiz mode: `flip`, `<ans:answer>`, `c`, `w`, `cancel`, `refresh` |
+| **`QUIZ` score flset** | `quiz score <flset:setindex>` e.g., `quiz score flset:6` <br> `quiz score <flset:setname>` e.g., `quiz score flset:Economics`                                                                 |
+
+##### **`QUIZ` flset**
+
+1. Starting a quiz
+
+    1. Prerequisites: No ongoing quiz. If so, an error message will appear in a red pop-up, prompting user to cancel the quiz or finish it.
+    
+    1. Test case: `quiz flset:1` or `quiz flset:CS2103T`<br>
+       Expected result: Quiz starts and first question is shown.
+       
+    1. Test case: `flip`, `answer:answer` when question is shown only<br>
+       Expected result: Shows the correct answer and user answer, "answer".
+       
+    1. Test case: `c`, `w`<br>
+       Expected result: Shows the next question.
+       
+    1. Test case: `flip`, `answer:answer` when question and answer shown <br>
+       Expected result: Error message saying command is not available at this time.
+       
+    1. Test case: `c`, `w`<br>
+       Expected result: Error message saying command is not available at this time.
+       
+    1. Test case: `refresh`<br>
+       Expected result: Green pop-up saying quiz is refreshed.
+       
+    1. Test case: `cancel`<br>
+       Stops the quiz.
+    
+    
+#### **`QUIZ` score flset**
+
+1. Viewing quiz score
+
+    1. Prerequisites: No ongoing quiz. If so, an error message will appear in a red pop-up, prompting user to cancel the quiz or finish it.
+    
+    1. Test case: `quiz score flset:1` or `quiz score flset:CS2103T`<br>
+       Expected result: Quiz records for the flashcard set "CS2103T" is shown.
+
+<p>&nbsp;</p>
+
+#### General commands
+
+| Action                          | Format, Examples |
+| ------------------------------- | ---------------- |
+| **View all available commands** | `help`           |
+| **Exit program**                | `exit`           |
+
+##### Viewing help
+
+1. Getting help page
+
+   1. Test case: `help`
+      Expected: A new window appears with the help information.
+      
+##### Exiting the program
+
+1. Exiting the program
+
+    1. Test case: `exit`
+       Expected: The application closes.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Open any one of the files, `schedule.json`, `flashcardbank.json` or `quizrecords.json` which is located in the `data` folder 
+   and delete the `id`s of at least one attribute of either a task, flashcard set or quiz score. After which start the application.
+   Expected: The StudyBananas opened should display an empty GUI for the feature with its file modified, where no data for that feature exists in the application.

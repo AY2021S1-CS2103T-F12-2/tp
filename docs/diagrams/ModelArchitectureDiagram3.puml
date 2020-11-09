@@ -2,33 +2,31 @@
 
 !include style.puml
 
-interface Model MODEL_COLOR
-interface ScheduleModel MODEL_COLOR
+skinparam arrowThickness 1.1
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classBorderColor MODEL_COLOR_T1
+
+Interface Model <<Interface>> MODEL_COLOR
+Interface ScheduleModel <<Interface>> MODEL_COLOR
 class ScheduleModelManager MODEL_COLOR
-interface FlashcardModel MODEL_COLOR
+Interface FlashcardModel <<Interface>> MODEL_COLOR
 class FlashcardModelManager MODEL_COLOR
-interface QuizModel MODEL_COLOR
+Interface QuizModel <<Interface>> MODEL_COLOR
 class QuizModelManager MODEL_COLOR
 class Schedule MODEL_COLOR
 class FlashcardBank MODEL_COLOR
 class Quiz MODEL_COLOR
 
+Model -[#black]-|> ScheduleModel
+Model -[#black]-|> FlashcardModel
+Model -[#black]-|> QuizModel
 
-Model -[MODEL_COLOR_T1]-|> ScheduleModel
-Model -[MODEL_COLOR_T1]-|> FlashcardModel
-Model -[MODEL_COLOR_T1]-|> QuizModel
+ScheduleModel <|.[#black]. ScheduleModelManager
+FlashcardModel <|.[#black]. FlashcardModelManager
+QuizModel <|.[#black]. QuizModelManager
 
-ScheduleModel <|.[MODEL_COLOR_T1]. ScheduleModelManager
-FlashcardModel <|.[MODEL_COLOR_T1]. FlashcardModelManager
-QuizModel <|.[MODEL_COLOR_T1]. QuizModelManager
-
-ScheduleModelManager .[MODEL_COLOR_T1].> Schedule
-FlashcardModelManager .[MODEL_COLOR_T1].> FlashcardBank
-QuizModelManager .[MODEL_COLOR_T1].> Quiz
-
-
-
-
-
+ScheduleModelManager .[#black].> Schedule
+FlashcardModelManager .[#black].> FlashcardBank
+QuizModelManager .[#black].> Quiz
 
 @enduml

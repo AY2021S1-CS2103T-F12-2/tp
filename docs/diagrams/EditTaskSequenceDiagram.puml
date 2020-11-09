@@ -76,7 +76,7 @@ activate ScheduleEditCommand LOGIC_COLOR
 ScheduleEditCommand -> ScheduleModel : sm.setTask()
 activate ScheduleModel MODEL_COLOR
 
-ScheduleModel -> Schedule : s.setTask()
+ScheduleModel ]-> Schedule : s.setTask()
 activate Schedule MODEL_COLOR
 
 Schedule -> UniqueTaskList : setTask()
