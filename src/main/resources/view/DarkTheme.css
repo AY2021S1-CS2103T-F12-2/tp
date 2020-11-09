@@ -182,7 +182,7 @@
     -fx-text-fill: #3399ff;
     -fx-border-color: #cccccc;
     -fx-border-style: segments(10, 15, 15, 15)  line-cap round ;
-    -fx-font-family: "Comic Sans MS";
+    -fx-font-family: "Helvetica Neue";
 }
 
 .result-display .label {

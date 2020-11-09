@@ -19,7 +19,7 @@
                    style="-fx-background-color: #AFEEEE;"
                    text="Question - This is where the question will be shown" wrapText="true">
                <font>
-                  <Font name="Comic Sans MS" size="14.0"/>
+                  <Font name="Helvetica Neue" size="14.0"/>
                </font>
                <opaqueInsets>
                   <Insets/>
@@ -32,10 +32,9 @@
          <content>
             <Label fx:id="answer" minHeight="190.0" minWidth="358.0" prefWidth="358.0"
                    style="-fx-label-padding: 0 0 0 20; -fx-background-color: #FFFFE0;"
-                   text="Answer - This is where the correct answer is shown (with or without your answer,
-                   depending on the command given)" wrapText="true">
+                   text="Answer - This is where the correct answer is shown (with or without your answer, depending on the command given)" wrapText="true">
                <font>
-                  <Font name="Comic Sans MS" size="14.0" />
+                  <Font name="Helvetica Neue" size="14.0" />
                </font>
             </Label>
          </content>
@@ -44,7 +43,7 @@
              style="-fx-background-radius: 0 0 20 20; -fx-label-padding: 0 0 0 20;
              -fx-background-color: #DDA0DD;" text="Instruction - This is where the next quiz commands are shown" wrapText="true">
          <font>
-            <Font name="Comic Sans MS" size="13.0" />
+            <Font name="Helvetica Neue" size="13.0" />
          </font>
       </Label>
    </children>

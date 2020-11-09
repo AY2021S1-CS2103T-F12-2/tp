@@ -17,7 +17,7 @@
                    style="-fx-label-padding: 0 0 0 5; -fx-background-color: #FFFFE0;"
                    text="Score" wrapText="true">
                 <font>
-                    <Font name="Comic Sans MS" size="14.0" />
+                    <Font name="Helvetica Neue" size="14.0" />
                 </font>
                 <opaqueInsets>
                     <Insets />
